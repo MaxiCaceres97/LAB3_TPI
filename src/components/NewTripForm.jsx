@@ -23,14 +23,14 @@ const NewTripForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Formulario enviado', formData);
-    // Aquí puedes enviar los datos a tu API o procesarlos de la manera que necesites.
+    // Aquí puedes enviar los datos a tu API o procesarlos como necesites
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="new-trip-form">
       <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Nuevo Viaje</h3>
+        <div className="card-header bg-primary">
+          <h3 className="card-title">Agregar Nuevo Viaje</h3>
         </div>
         <div className="card-body">
           <div className="form-group">
@@ -42,7 +42,7 @@ const NewTripForm = () => {
               value={formData.origen}
               onChange={handleChange}
               className="form-control"
-              placeholder="Introduce el origen del viaje"
+              placeholder="Introduce el origen"
             />
           </div>
 
@@ -55,7 +55,7 @@ const NewTripForm = () => {
               value={formData.destino}
               onChange={handleChange}
               className="form-control"
-              placeholder="Introduce el destino del viaje"
+              placeholder="Introduce el destino"
             />
           </div>
 
@@ -92,7 +92,7 @@ const NewTripForm = () => {
               value={formData.peso}
               onChange={handleChange}
               className="form-control"
-              placeholder="Introduce el peso de la mercadería"
+              placeholder="Introduce el peso en kg"
             />
           </div>
 
@@ -105,7 +105,7 @@ const NewTripForm = () => {
               value={formData.precio}
               onChange={handleChange}
               className="form-control"
-              placeholder="Introduce el precio de la mercadería"
+              placeholder="Introduce el precio en USD"
             />
           </div>
         </div>

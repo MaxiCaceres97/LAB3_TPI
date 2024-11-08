@@ -1,4 +1,5 @@
 import React from 'react';
+import AdminLayout from '../components/AdminLayout';
 import NewTripForm from '../components/NewTripForm';
 
 const NewTrip = () => (

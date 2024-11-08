@@ -9,7 +9,10 @@ const AdminLayout = ({ children }) => (
           <Link to="/" className="nav-link">Home</Link>
         </li>
         <li className="nav-item">
-          <Link to="/profile" className="nav-link">Perfil</Link>
+          <Link to="/profile" className="nav-link">Rol: </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/contacto" className="nav-link">Contacto</Link> {/* Enlace a la página de contacto */}
         </li>
       </ul>
     </nav>
@@ -27,6 +30,10 @@ const AdminLayout = ({ children }) => (
             <li className="nav-item">
               <Link to="/nuevo-viaje" className="nav-link">Nuevo Viaje</Link>
             </li>
+            <li className="nav-item">
+              <Link to="/historial-viajes" className="nav-link">Historial de Viajes</Link>
+            </li>
+
           </ul>
         </nav>
       </div>
