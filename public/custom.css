@@ -1,7 +1,42 @@
-.wrapper {
-    background-image: url('/img/PORTADA-RUTA-40.jpg'); /* Ruta relativa desde la raíz del dominio */
-    background-size: cover; /* Otras propiedades que puedes usar */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    height: 100vh; /* Asegúrate de que tenga una altura adecuada */
+
+
+
+/* Establece el fondo en toda la página */
+body {
+    background-image: url('/img/PORTADA-RUTA-40.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
 }
+
+/* Ajusta el contenido para que sea transparente y permita ver el fondo */
+.wrapper, .content-wrapper, .main-footer, .main-header {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+}
+  
+/* Configuración para el div root */
+#root {
+    background-color: transparent; /* Asegúrate de que no tenga un color de fondo */
+}
+
+/* Anula cualquier opacidad o fondo superpuesto en content-wrapper */
+.content-wrapper {
+    background: none !important;  /* Quita cualquier fondo */
+    background-color: transparent !important;  /* Quita color de fondo */
+    opacity: 1 !important;  /* Quita opacidad */
+    box-shadow: none !important; /* Elimina sombras */
+}
+
+
+
+.home-content {
+    margin: 70px auto 40px;
+    padding: 20px;
+    max-width: 1000px;
+  }
+  
+
+  

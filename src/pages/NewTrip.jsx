@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import AdminLayout from '../components/AdminLayout';
+import React from 'react';
 import NewTripForm from '../components/NewTripForm';
 
-const NewTrip = () => {
-  const [trips, setTrips] = useState([]);
-
-  const handleAddTrip = (tripData) => {
-    setTrips([...trips, tripData]);
-  };
-
-  return (
-    <AdminLayout>
-      <h2>Agregar Nuevo Viaje</h2>
-      <NewTripForm onAddTrip={handleAddTrip} />
-    </AdminLayout>
-  );
-};
+const NewTrip = () => (
+  <AdminLayout>
+    <div className="content-wrapper">
+      <section className="content">
+        <div className="container-fluid">
+          <NewTripForm />
+        </div>
+      </section>
+    </div>
+  </AdminLayout>
+);
 
 export default NewTrip;
