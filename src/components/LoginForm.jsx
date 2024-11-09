@@ -67,7 +67,7 @@ const LoginForm = () => {
                 <input
                   type="password"
                   className="form-control"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -81,7 +81,7 @@ const LoginForm = () => {
               <div className="row">
                 <div className="col-12">
                   <button type="submit" className="btn btn-primary btn-block">
-                    Sign In
+                    Iniciar sesión
                   </button>
                 </div>
               </div>
