@@ -41,12 +41,12 @@ const LoginForm = () => {
   return (
     <div className="hold-transition login-page">
       <div className="login-box">
-        <div className="login-logo">
-          <a href="/"><b>LOGITRANSPORTE</b></a>
-        </div>
-        <div className="card">
+        <div className="card card-primary">
+          <div className="card-header text-center">
+            <h3 className="card-title">Iniciar Sesión</h3>
+          </div>
           <div className="card-body login-card-body">
-            <p className="login-box-msg">Inice sesión para ingresar al sitio web</p>
+            <p className="login-box-msg">Ingresa tus datos para continuar</p>
             <form onSubmit={handleSubmit}>
               <div className="input-group mb-3">
                 <input
@@ -67,7 +67,7 @@ const LoginForm = () => {
                 <input
                   type="password"
                   className="form-control"
-                  placeholder="Contraseña"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -81,7 +81,7 @@ const LoginForm = () => {
               <div className="row">
                 <div className="col-12">
                   <button type="submit" className="btn btn-primary btn-block">
-                    Iniciar sesión
+                    Iniciar Sesión
                   </button>
                 </div>
               </div>
