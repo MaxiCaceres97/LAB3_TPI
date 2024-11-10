@@ -33,7 +33,9 @@ const AdminLayout = ({ children }) => (
             <li className="nav-item">
               <Link to="/historial-viajes" className="nav-link">Historial de Viajes</Link>
             </li>
-
+            <li className="nav-item">
+              <Link to="/bills" className="nav-link">Bills</Link>
+            </li>
           </ul>
         </nav>
       </div>

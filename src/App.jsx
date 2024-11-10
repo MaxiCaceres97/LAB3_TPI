@@ -7,6 +7,7 @@ import TravelHistory from './pages/TravelHistory';
 import ContactUs from './pages/ContactUs';
 import AuthenticationContextProvider from './components/contexts/AuthenticationContext'; // Proveedor del contexto
 import ProtectedRoute from './components/contexts/ProtectedRoute'; // Ruta protegida
+import Bill from './pages/Bill';  
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           {/* Ruta pública */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/contac" element={<ContactUs />} />
 
           {/* Rutas protegidas */}
           <Route
@@ -35,10 +37,10 @@ function App() {
             }
           />
           <Route
-            path="/contacto"
+            path="/bills"
             element={
               <ProtectedRoute>
-                <ContactUs />
+                <Bill />
               </ProtectedRoute>
             }
           />
