@@ -1,29 +1,79 @@
 import React, { useState } from 'react';
+import FormField from './contexts/FormField';
+import { validateTripForm } from './contexts/ValidateTripForm';
+
 
 const NewTripForm = () => {
   const [formData, setFormData] = useState({
-    origen: '',
-    destino: '',
-    fecha: '',
-    hora: '',
-    peso: '',
-    precio: ''
+    origen: "",
+    destino: "",
+    fecha: "",
+    hora: "",
+    peso: "",
+    precio: "",
   });
 
-  // Maneja el cambio de los campos del formulario
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const [loading, setLoading] = useState(false); // Indicar estado de carga
+  const [error, setError] = useState(null); // Manejar errores
+  const [success, setSuccess] = useState(false); // Mostrar éxito
+
+  const API_URL = import.meta.env.VITE_API_URL || "https://localhost:7175/api/";
+
+  // Maneja los cambios en los campos del formulario
+  const handleChange = (name, value) => {
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   // Maneja el envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Formulario enviado', formData);
-    // Aquí puedes enviar los datos a tu API o procesarlos como necesites
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    const validationError = validateTripForm(formData);
+    if (validationError) {
+      setError(validationError);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}Trip`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Convertir datos a JSON
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error al agregar el viaje");
+      }
+
+      const data = await response.json();
+      setSuccess(true); // Indicar éxito
+      alert("Viaje creado exitosamente");
+
+      // Limpiar el formulario después de enviar
+      setFormData({
+        origen: "",
+        destino: "",
+        fecha: "",
+        hora: "",
+        peso: "",
+        precio: "",
+      });
+    } catch (err) {
+      console.error("Error:", err.message);
+      setError(err.message);
+    } finally {
+      setLoading(false); // Finalizar estado de carga
+    }
   };
 
   return (
@@ -33,85 +83,21 @@ const NewTripForm = () => {
           <h3 className="card-title">Agregar Nuevo Viaje</h3>
         </div>
         <div className="card-body">
-          <div className="form-group">
-            <label htmlFor="origen">Origen</label>
-            <input
-              type="text"
-              id="origen"
-              name="origen"
-              value={formData.origen}
+          {["origen", "destino", "fecha", "hora", "peso", "precio"].map((field) => (
+            <FormField
+              key={field}
+              name={field}
+              value={formData[field]}
               onChange={handleChange}
-              className="form-control"
-              placeholder="Introduce el origen"
             />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="destino">Destino</label>
-            <input
-              type="text"
-              id="destino"
-              name="destino"
-              value={formData.destino}
-              onChange={handleChange}
-              className="form-control"
-              placeholder="Introduce el destino"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="fecha">Fecha</label>
-            <input
-              type="date"
-              id="fecha"
-              name="fecha"
-              value={formData.fecha}
-              onChange={handleChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="hora">Hora</label>
-            <input
-              type="time"
-              id="hora"
-              name="hora"
-              value={formData.hora}
-              onChange={handleChange}
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="peso">Peso de la Mercadería (kg)</label>
-            <input
-              type="number"
-              id="peso"
-              name="peso"
-              value={formData.peso}
-              onChange={handleChange}
-              className="form-control"
-              placeholder="Introduce el peso en kg"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="precio">Precio de la Mercadería (USD)</label>
-            <input
-              type="number"
-              id="precio"
-              name="precio"
-              value={formData.precio}
-              onChange={handleChange}
-              className="form-control"
-              placeholder="Introduce el precio en USD"
-            />
-          </div>
+          ))}
         </div>
-
         <div className="card-footer">
-          <button type="submit" className="btn btn-primary">Agregar Viaje</button>
+          <button type="submit" className="btn btn-primary" disabled={loading}>
+            {loading ? "Agregando..." : "Agregar Viaje"}
+          </button>
+          {error && <p className="text-danger mt-2">{error}</p>}
+          {success && <p className="text-success mt-2">¡Viaje agregado con éxito!</p>}
         </div>
       </div>
     </form>
