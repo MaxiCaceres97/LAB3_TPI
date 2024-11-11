@@ -8,11 +8,16 @@ const AdminLayout = ({ children }) => (
         <li className="nav-item">
           <Link to="/" className="nav-link">Home</Link>
         </li>
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">Login: </Link>
+        <li className="nav-item d-flex align-items-center">
+          <Link to="/profile" className="nav-link">Rol: </Link>
+          <select className="form-select ms-2" aria-label="Seleccionar rol">
+            <option value="admin">Admin</option>
+            <option value="cliente">Cliente</option>
+            <option value="chofer">Chofer</option>
+          </select>
         </li>
         <li className="nav-item">
-          <Link to="/profile" className="nav-link">Rol: </Link>
+          <Link to="/login" className="nav-link">Login </Link>
         </li>
         <li className="nav-item">
           <Link to="/contacto" className="nav-link">Contacto</Link> {/* Enlace a la página de contacto */}
@@ -22,8 +27,11 @@ const AdminLayout = ({ children }) => (
 
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       <a href="/" className="brand-link">
-        <span className="brand-text font-weight-light">AdminLTE 3</span>
+        <span className="brand-text font-weight-light" style={{ display: "block", textAlign: "center" }}>
+          LOGITRANSPORTE
+        </span>
       </a>
+
       <div className="sidebar">
         <nav className="mt-2">
           <ul className="nav nav-pills nav-sidebar flex-column">
@@ -37,7 +45,7 @@ const AdminLayout = ({ children }) => (
               <Link to="/historial-viajes" className="nav-link">Historial de Viajes</Link>
             </li>
             <li className="nav-item">
-              <Link to="/bills" className="nav-link">Bills</Link>
+              <Link to="/bills" className="nav-link">Facturación</Link>
             </li>
           </ul>
         </nav>

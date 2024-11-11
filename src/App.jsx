@@ -17,7 +17,7 @@ function App() {
           {/* Ruta pública */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/contac" element={<ContactUs />} />
+          <Route path="/contacto" element={<ContactUs />} />
 
           {/* Rutas protegidas */}
           <Route

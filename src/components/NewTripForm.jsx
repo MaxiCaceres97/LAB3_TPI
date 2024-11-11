@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import FormField from './contexts/FormField';
 import { validateTripForm } from './contexts/ValidateTripForm';
 
-
 const NewTripForm = () => {
   const [formData, setFormData] = useState({
-    origen: "",
-    destino: "",
-    fecha: "",
-    hora: "",
-    peso: "",
-    precio: "",
+    startingPoint: "",  // Origen
+    destination: "",    // Destino
+    departureDate: "",  // Fecha de partida
   });
 
-  const [loading, setLoading] = useState(false); // Indicar estado de carga
-  const [error, setError] = useState(null); // Manejar errores
-  const [success, setSuccess] = useState(false); // Mostrar éxito
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL || "https://localhost:7175/api/";
 
@@ -41,13 +37,26 @@ const NewTripForm = () => {
       return;
     }
 
+    // Construimos la solicitud, incluyendo los campos automáticos
+    const requestData = {
+      startingPoint: formData.startingPoint,
+      destination: formData.destination,
+      departureDate: formData.departureDate,
+      truckDriverId: 2, // Automáticamente asignado
+      clientId: 3,       // Automáticamente asignado
+      bill: {
+        amount: 25000,   // Automáticamente asignado
+        payState: 0,     // Automáticamente asignado
+      },
+    };
+
     try {
       const response = await fetch(`${API_URL}Trip`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData), // Convertir datos a JSON
+        body: JSON.stringify(requestData), // Convertimos a JSON
       });
 
       if (!response.ok) {
@@ -55,18 +64,14 @@ const NewTripForm = () => {
         throw new Error(errorData.message || "Error al agregar el viaje");
       }
 
-      const data = await response.json();
       setSuccess(true); // Indicar éxito
       alert("Viaje creado exitosamente");
 
       // Limpiar el formulario después de enviar
       setFormData({
-        origen: "",
-        destino: "",
-        fecha: "",
-        hora: "",
-        peso: "",
-        precio: "",
+        startingPoint: "",
+        destination: "",
+        departureDate: "",
       });
     } catch (err) {
       console.error("Error:", err.message);
@@ -83,14 +88,42 @@ const NewTripForm = () => {
           <h3 className="card-title">Agregar Nuevo Viaje</h3>
         </div>
         <div className="card-body">
-          {["origen", "destino", "fecha", "hora", "peso", "precio"].map((field) => (
-            <FormField
-              key={field}
-              name={field}
-              value={formData[field]}
-              onChange={handleChange}
-            />
-          ))}
+          {/* Campo de Origen */}
+          <FormField
+            name="startingPoint"
+            label="Origen"
+            value={formData.startingPoint}
+            onChange={handleChange}
+          />
+          
+          {/* Campo de Destino */}
+          <FormField
+            name="destination"
+            label="Destino"
+            value={formData.destination}
+            onChange={handleChange}
+          />
+          
+          {/* Campo de Fecha de Partida */}
+          <FormField
+            name="departureDate"
+            label="Fecha de partida"
+            type="date" // Selector de fecha
+            value={formData.departureDate}
+            onChange={handleChange}
+          />
+          <FormField
+            name="weight"
+            label="Peso de mercaderia"
+            value={formData.weight}
+            onChange={handleChange}
+          />
+          <FormField
+            name="price"
+            label="Precio de mercaderia"
+            value={formData.price}
+            onChange={handleChange}
+          />
         </div>
         <div className="card-footer">
           <button type="submit" className="btn btn-primary" disabled={loading}>
@@ -105,3 +138,4 @@ const NewTripForm = () => {
 };
 
 export default NewTripForm;
+
