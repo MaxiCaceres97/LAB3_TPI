@@ -1,0 +1,30 @@
+.content-wrapper{
+    background-image: url('../public/img/PORTADA-RUTA-40.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    color: white;
+}
+
+.home-content{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5%;
+}
+
+.travel-history-container {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 5%;
+}
+
+.container-fluid{
+    padding: 1px;
+}
+
+.login-page{
+    background-image: url('../public/img/PORTADA-RUTA-40.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
