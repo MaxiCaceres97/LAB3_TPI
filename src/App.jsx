@@ -8,6 +8,7 @@ import ContactUs from './pages/ContactUs';
 import AuthenticationContextProvider from './components/contexts/AuthenticationContext'; // Proveedor del contexto
 import ProtectedRoute from './components/contexts/ProtectedRoute'; // Ruta protegida
 import Bill from './pages/Bill';  
+import './App.css';
 
 function App() {
   return (
